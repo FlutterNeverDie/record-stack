@@ -109,11 +109,9 @@ function App() {
     try {
       let finalFile: File | Blob = file;
 
-      // HEIC/HEIF 파일인 경우 변환 시도
       const isHeic = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif') || file.type === 'image/heic';
       
       if (isHeic) {
-        // heic2any 라이브러리가 설치되어 있어야 합니다.
         const converted = await heic2any({
           blob: file,
           toType: 'image/jpeg',
@@ -126,7 +124,7 @@ function App() {
       addFrame(url);
     } catch (err) {
       console.error("이미지 업로드/변환 실패:", err);
-      alert("이미지 처리 중 오류가 발생했습니다. (heic2any 라이브러리가 설치되어 있는지 확인해 주세요)");
+      alert("이미지 처리 중 오류가 발생했습니다.");
     } finally {
       setIsConverting(false);
       if (fileInputRef.current) fileInputRef.current.value = '';
@@ -219,6 +217,7 @@ function App() {
             className="main-view"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}
           >
@@ -301,11 +300,11 @@ function App() {
               </footer>
             )}
 
-            {/* Modals & Overlays */}
+            {/* Modals & Overlays - Inside main-view motion.div scope */}
             <AnimatePresence>
               {showTimePicker && (
                 <TimeDialPicker 
-                  key="time-picker"
+                  key="time-dial"
                   onSelect={(time) => {
                     if (activeFrameId) updateFrame(activeFrameId, { time });
                     setShowTimePicker(false);
@@ -315,7 +314,7 @@ function App() {
               )}
               {showRecordPopup && (
                 <RecordPopup 
-                  key="record-popup"
+                  key="record-modal"
                   initialText={frames.find(f => f.id === activeFrameId)?.text || ''}
                   onConfirm={(text) => {
                     if (activeFrameId) updateFrame(activeFrameId, { text });
@@ -326,7 +325,7 @@ function App() {
               )}
               {isConverting && (
                 <motion.div 
-                  key="loading"
+                  key="conv-loading"
                   className="loading-overlay"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

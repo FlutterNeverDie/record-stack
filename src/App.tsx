@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
-import { useRecordStore, Frame } from './store';
+import { useRecordStore } from './store';
+import type { Frame } from './store';
 import { Plus, Trash2, Edit2, GripVertical, Clock } from 'lucide-react';
 import { motion, Reorder, AnimatePresence } from 'framer-motion';
 import { toPng } from 'html-to-image';

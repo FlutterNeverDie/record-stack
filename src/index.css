@@ -1,29 +1,28 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
+  /* Premium Beige/White Theme */
+  --bg: #fdfaf5;
+  --panel-bg: rgba(255, 255, 255, 0.8);
+  --text-main: #2d2a26;
+  --text-sub: #8b8682;
+  --border: #e9e4df;
+  --accent: #d4a373;
+  --accent-light: #faedcd;
+  --frame-shadow: rgba(0, 0, 0, 0.03) 0 4px 20px -2px;
+  
+  --sans: 'Outfit', 'Inter', system-ui, sans-serif;
+  --serif: 'Playfair Display', serif;
+  
+  font: 16px/1.5 var(--sans);
+  color: var(--text-main);
   background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
   @media (max-width: 1024px) {
     font-size: 16px;
@@ -51,15 +50,15 @@
 }
 
 #root {
-  width: 1126px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 500px; /* Mobile Viewport Limit */
   margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
+  overflow: hidden; /* Strict No Scroll */
+  background: var(--bg);
+  position: relative;
 }
 
 body {
